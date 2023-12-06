@@ -1,8 +1,8 @@
-import itertools
 import pandas as pd
 import numpy as np
+import os
 BIGNUM = 999
-##test commit
+
 def findDistance(map, route):
         distance = 0 
         i = 0
@@ -27,8 +27,10 @@ def distanceTooLong(map, route, MAXDIST):
             i += 1
         return distance >= MAXDIST
 
-def mapReader(): 
-    map = pd.read_excel(r'D:\USER FILES\Documents\Python\map solver\youyangs.xlsx')  ##[0,1,2][A,B,C]
+def mapReader(FILE): 
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    maps_folder = os.path.join(script_dir, 'maps')
+    map = pd.read_excel(os.path.join(maps_folder, f'{FILE}.xlsx'))  ##[0,1,2][A,B,C]
     map = map.to_numpy()
     rows = len(map)
     columns = len(map[0])
@@ -66,11 +68,8 @@ def mapReader():
                 map[i][j] = 0
             j += 1
         i += 1
-    ##printMap(map)
+    ##print(np.matrix(map))
     return map, points
 
 def isNan(x): 
     return (x != x)
-
-def printMap(map):
-    print(np.matrix(map))

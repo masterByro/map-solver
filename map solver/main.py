@@ -1,8 +1,9 @@
 import utils
-GETXCHECKPOINTS = 17
+GETXCHECKPOINTS = 20
 OUTPUTLENIENCY = 1
-MAXDIST = 999
+FILE = 'gow1'
 
+MAXDIST = 999
 BIGNUM = 999
 ROUTELENGTH = 2 + GETXCHECKPOINTS
 
@@ -12,7 +13,7 @@ def main():
     currentDist = 0
 
     print("Map Crusher 2000")
-    map, points = utils.mapReader()
+    map, points = utils.mapReader(FILE)
     MAPLENGTH = len(map)
     bestDist = MAXDIST
     bestRoutes = []
@@ -25,7 +26,7 @@ def main():
             if possibleLocations != 'NA': 
                 nextLocation=possibleLocations[0]
                 route.append(nextLocation[0])
-                currentDist += nextLocation[1]
+                currentDist = round(currentDist + nextLocation[1], 3)
             else:
                 backNode(route, map, MAPLENGTH, currentDist, bestDist)
                 currentDist = utils.findDistance(map, route)
@@ -81,7 +82,7 @@ def nextNodes(route, map, MAPLENGTH, currentDist, bestDist):
 
         i += 1
     if len(possibleNextLocations) == 0: return 'NA'
-    possibleNextLocations = sorted(possibleNextLocations, key=lambda x: x[1])
+    ##possibleNextLocations = sorted(possibleNextLocations, key=lambda x: x[1])
     return possibleNextLocations
 
 
