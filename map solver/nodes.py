@@ -6,11 +6,8 @@ def nextNodes(route, map, MAPLENGTH, currentDist, bestDist, ROUTELENGTH):
     i = 0
     while i < MAPLENGTH:
         possibleDist = distances[i]
-        if  not(possibleDist == 0) and not(i in route) and ( possibleDist + currentDist <= bestDist) and not(i == MAPLENGTH-1 and len(route) != ROUTELENGTH-1) and not(i != MAPLENGTH-1 and len(route) == ROUTELENGTH-1):
+        if not(possibleDist == 0) and not(i in route) and ( possibleDist + currentDist <= bestDist) and not(i == MAPLENGTH-1 and len(route) != ROUTELENGTH-1) and not(i != MAPLENGTH-1 and len(route) == ROUTELENGTH-1):
             possibleNextLocations.append([i,possibleDist])
-            if currentDist + possibleDist >= 200:
-                print(utils.findDistance(map, route))
-
         i += 1
     if len(possibleNextLocations) == 0: return 'NA'
     return possibleNextLocations
